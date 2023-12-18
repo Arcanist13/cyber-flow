@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="py-3 text-center">
+      <h1>Flowcharts for Life!</h1>
+    </div>
+  </div>
+  <div class="row px-5">
+    <!-- List of charts -->
+    <div *ngIf="!currentChart">
+      <div *ngFor="let chart of maps; index as i;" class="py-2">
+        <mat-card (click)="loadChart(i);" class="pointer">
+          <mat-card-content>
+            <mat-card-title>{{ chart.title }}</mat-card-title>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Specific option -->
+    <mat-card *ngIf="currentChart">
+      <mat-card-header class="pb-3">
+        <mat-card-title>{{ currentOption?.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions *ngIf="currentOption?.options?.length">
+        <div class="row w-100 text-center" *ngFor="let flowoption of currentOption?.options; index as j;">
+          <div class="col">
+            <button type="button" class="btn btn-outline-primary" (click)="loadKey(flowoption.next)">{{ flowoption.text }}</button>
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Home button -->
+  <div class="row">
+    <div class="py-3 text-center">
+      <button mat-raised-button color="primary" (click)="reset()">Home</button>
+    </div>
+  </div>
+</div>
